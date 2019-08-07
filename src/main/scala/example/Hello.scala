@@ -25,20 +25,16 @@ object Hello extends App {
   system.registerOnTermination {
     System.exit(0)
   }
+
   implicit val materializer = ActorMaterializer()
 
-  val config = AhcWSClientConfigFactory.forConfig(conf)
-  logger.info("keyStoreConfigs -> {}", config.wsClientConfig.ssl.keyManagerConfig.keyStoreConfigs)
-  val ws = StandaloneAhcWSClient(config)
+  val ws = StandaloneAhcWSClient()
 
-  logger.info("ws -> {}", ws)
-
-  val request = ws.url("https://identitysso-cert.betfair.com/api/certlogin").withHttpHeaders(("X-Application", applicationKey))
-
-  logger.info("request -> {}", request)
-  logger.info("headers -> {}", request.headers)
-  logger.info("params -> {}", body)
-  logger.info("body -> {}", body)
+  val request = ws.url("https://identitysso-cert.betfair.com/api/certlogin")
+                  .withHttpHeaders(
+                    ("X-Application", applicationKey),
+                    ("Content-Type", "application/x-www-form-urlencoded")
+                  )
 
   request.post(body).map { response =>
     logger.info("response -> {} {}", response.contentType, response.body)
