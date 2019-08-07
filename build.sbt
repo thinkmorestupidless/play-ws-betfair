@@ -9,9 +9,9 @@ lazy val root = (project in file("."))
   .settings(
     name := "play-ws-betfair",
     libraryDependencies ++= Seq(
-      "com.typesafe.akka" %% "akka-actor" % "2.5.23",
-      "com.typesafe.play" %% "play-ahc-ws-standalone" % "2.0.7",
-      "org.slf4j" % "slf4j-simple" % "1.7.26",
+      akka,
+      wsStandalone,
+      slf4j,
       scalaTest
     )
   )
