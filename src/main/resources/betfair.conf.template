@@ -1,0 +1,10 @@
+betfair {
+    application-key = ???
+    username = ???
+    password = ???
+
+    cert {
+        location = ???
+        keyPassword = ???
+    }
+}
